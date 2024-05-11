@@ -44,6 +44,7 @@ func getTasks(w http.ResponseWriter, r *http.Request) {
 	resp, err := json.Marshal(tasks)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -77,6 +78,7 @@ func getTask(w http.ResponseWriter, r *http.Request) {
 	task, ok := tasks[id]
 	if !ok {
 		http.Error(w, "Задача не найдена", http.StatusBadRequest)
+		return
 	}
 
 	resp, err := json.Marshal(task)
@@ -96,6 +98,7 @@ func delTask(w http.ResponseWriter, r *http.Request) {
 	task, ok := tasks[id]
 	if !ok {
 		http.Error(w, "Задача не найдена", http.StatusBadRequest)
+		return
 	}
 
 	_, err := json.Marshal(task)
